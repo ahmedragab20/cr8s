@@ -1,10 +1,7 @@
-mod models;
-mod repository;
 mod schema;
-
-
+mod models;
+mod repositories;
 
 fn main() {
     // 
 }
-
