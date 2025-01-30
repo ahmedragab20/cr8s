@@ -7,7 +7,7 @@ services:
       - POSTGRES_DB=app_db
     ports:
       - "5432:5432"
-    command: ["postgres", "-c", "log_statement=all"]
+    command: [ "postgres", "-c", "log_statement=all" ]
 
   redis:
     image: redis:latest
@@ -16,10 +16,9 @@ services:
     build: .
     environment:
       - DATABASE_URL=postgres://postgres:postgres@postgres/app_db
-      - |
-        ROCKET_DATABASES={
-          postgres={url=postgres://postgres:postgres@postgres/app_db},
-          redis={url=redis://redis:6379}
+      - ROCKET_DATABASES={
+        postgres={url=postgres://postgres:postgres@postgres/app_db},
+        redis={url=redis://redis:6379}
         }
       - SMTP_HOST=smtp.gmail.com
       - SMTP_USERNAME=paris.liakos@gmail.com
