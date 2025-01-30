@@ -18,8 +18,10 @@ async fn main() {
             "/",
             routes![
                 rustaceans_routes::get_rustaceans,
+                rustaceans_routes::get_rustacean_by_id,
                 rustaceans_routes::create_rustacean,
-                rustaceans_routes::get_rustacean_by_id
+                rustaceans_routes::update_rustacean,
+                rustaceans_routes::delete_rusacean
             ],
         )
         .attach(DBConnection::init())

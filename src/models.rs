@@ -19,11 +19,11 @@ pub struct NewRustacean<'a> {
     pub email: Cow<'a, str>,
 }
 
-#[derive(AsChangeset)]
+#[derive(Queryable, Selectable, AsChangeset, serde::Serialize, serde::Deserialize)]
 #[diesel(table_name = crate::schema::rustaceans)]
 pub struct UpdateRustacean<'a> {
-    pub name: &'a str,
-    pub email: &'a str,
+    pub name: Option<&'a str>,
+    pub email: Option<&'a str>,
 }
 
 #[derive(Queryable, Selectable)]

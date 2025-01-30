@@ -41,10 +41,10 @@ impl RustaceansRepository {
 
     pub async fn update(
         conn: &mut AsyncPgConnection,
-        rustacean: Rustacean,
+        id: i32,
         updated_data: UpdateRustacean<'_>,
     ) -> RustaceansGetResult {
-        diesel::update(rustaceans_dsl::rustaceans::table().find(rustacean.id))
+        diesel::update(rustaceans_dsl::rustaceans::table().find(id))
             .set(updated_data)
             .get_result(conn)
             .await
