@@ -1,31 +1,27 @@
-use crate::repositories::RustaceansRepository;
-use rocket::http::Status;
-use rocket::response::status::Custom;
 use rocket::routes;
-use rocket::serde::json::serde_json::json;
-use rocket::serde::json::Value;
-use rocket_db_pools::{Connection, Database};
-use serde::de::Unexpected::Option;
-
+use rocket_db_pools::Database;
 mod models;
 mod repositories;
+mod rocket_routes;
 mod schema;
+
+use rocket_routes::rustaceans as rustaceans_routes;
 
 #[derive(Database)]
 #[database("postgres")]
 struct DBConnection(rocket_db_pools::diesel::PgPool);
 
-#[rocket::get("/rustaceans")]
-async fn get_rustaceans(mut cnn: Connection<DBConnection>) -> Result<Value, Custom<Value>> {
-    RustaceansRepository::retrieve_by_limit(&mut cnn, 100)
-        .await
-        .map(|r| json!(r))
-        .map_err(|_| Custom(Status::InternalServerError, json!("Internal Server Error")))
-}
 #[rocket::main]
 async fn main() {
     let _ = rocket::build()
-        .mount("/", routes![get_rustaceans])
+        .mount(
+            "/",
+            routes![
+                rustaceans_routes::get_rustaceans,
+                rustaceans_routes::create_rustacean,
+                rustaceans_routes::get_rustacean_by_id
+            ],
+        )
         .attach(DBConnection::init())
         .launch()
         .await;

@@ -1,6 +1,7 @@
 use chrono::NaiveDateTime;
 use diesel::prelude::*;
 use serde;
+use std::borrow::Cow;
 
 #[derive(Queryable, Selectable, serde::Serialize, serde::Deserialize)]
 #[diesel(table_name = crate::schema::rustaceans)]
@@ -11,11 +12,11 @@ pub struct Rustacean {
     pub created_at: NaiveDateTime,
 }
 
-#[derive(Insertable)]
+#[derive(Insertable, serde::Serialize, serde::Deserialize)]
 #[diesel(table_name = crate::schema::rustaceans)]
 pub struct NewRustacean<'a> {
-    pub name: &'a str,
-    pub email: &'a str,
+    pub name: Cow<'a, str>,
+    pub email: Cow<'a, str>,
 }
 
 #[derive(AsChangeset)]

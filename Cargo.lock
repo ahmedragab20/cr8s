@@ -224,6 +224,7 @@ dependencies = [
  "chrono",
  "diesel",
  "diesel-async",
+ "rand",
  "rocket",
  "rocket_db_pools",
  "serde",
