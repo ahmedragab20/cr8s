@@ -1,5 +1,5 @@
-use crate::models::NewCrate;
-use crate::repositories::CratesRepository;
+use crate::models::crates::NewCrate;
+use crate::repositories::crates::CratesRepository;
 use crate::DBConnection;
 use crate::*;
 use cr8s::throw_interval_error;

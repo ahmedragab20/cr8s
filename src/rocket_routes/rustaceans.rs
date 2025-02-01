@@ -1,5 +1,5 @@
-use crate::models::{NewRustacean, UpdateRustacean};
-use crate::repositories::RustaceansRepository;
+use crate::models::rustaceans::{NewRustacean, UpdateRustacean};
+use crate::repositories::rustaceans::RustaceansRepository;
 use crate::DBConnection;
 use crate::*;
 use cr8s::throw_interval_error;
