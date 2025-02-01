@@ -6,6 +6,7 @@ use rocket::serde::json::{Json, Value};
 
 /// Throws an interval server response with `InternalServerError` status
 pub fn throw_interval_error(e: Error) -> Custom<Json<Value>> {
+    rocket::error!("Server Error");
     Custom(
         Status::InternalServerError,
         Json(json!({
